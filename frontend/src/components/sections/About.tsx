@@ -1,102 +1,115 @@
-import {
-  ShieldCheck,
-  Activity,
-  BellRing,
-} from "lucide-react";
+import { ShieldCheck, Activity, BellRing } from "lucide-react";
+import Container from "../ui/Container";
+import Card from "../ui/Card";
 
 export default function About() {
   return (
-    <section className="bg-slate-950 py-32">
+    <section
+      id="proyecto"
+      className="py-32 bg-slate-950 text-white"
+    >
+      <Container>
+        <div className="max-w-3xl mx-auto text-center">
 
-      <div className="max-w-7xl mx-auto px-8">
+          <span
+            className="
+            inline-block
+            px-5
+            py-2
+            rounded-full
+            border
+            border-cyan-400/30
+            bg-cyan-500/10
+            text-cyan-300
+            uppercase
+            tracking-[4px]
+            text-sm
+            "
+          >
+            Sobre FluxGuard
+          </span>
 
-        <h2 className="text-5xl font-bold text-center">
+          <h2 className="text-5xl font-bold mt-8">
+            ¿Qué es <span className="text-cyan-400">FluxGuard</span>?
+          </h2>
 
-          ¿Qué es <span className="text-cyan-400">FluxGuard</span>?
+          <p className="text-slate-400 text-lg leading-8 mt-8">
+            FluxGuard es una plataforma desarrollada para supervisar
+            sistemas eléctricos mediante tecnologías IoT. Nuestro objetivo
+            es detectar anomalías, prevenir fallas y facilitar el monitoreo
+            remoto en tiempo real mediante una interfaz moderna, intuitiva
+            y accesible.
+          </p>
 
-        </h2>
-
-        <p className="text-center text-slate-400 max-w-3xl mx-auto mt-8 text-lg leading-8">
-
-          FluxGuard es una plataforma desarrollada para supervisar
-          sistemas eléctricos mediante tecnologías IoT. Nuestro objetivo
-          es detectar anomalías, prevenir fallas y facilitar el monitoreo
-          remoto en tiempo real mediante una interfaz moderna y accesible.
-
-        </p>
-
-        <div className="grid md:grid-cols-3 gap-8 mt-20">
-
-          <div className="rounded-3xl bg-slate-900 border border-slate-800 p-8 hover:border-cyan-400 transition hover:-translate-y-2 duration-300">
-
-            <ShieldCheck
-              size={48}
-              className="text-cyan-400"
-            />
-
-            <h3 className="text-2xl font-bold mt-6">
-
-              Seguridad
-
-            </h3>
-
-            <p className="text-slate-400 mt-4 leading-7">
-
-              Detecta comportamientos anómalos antes de que se conviertan
-              en una falla crítica.
-
-            </p>
-
-          </div>
-
-          <div className="rounded-3xl bg-slate-900 border border-slate-800 p-8 hover:border-cyan-400 transition hover:-translate-y-2 duration-300">
-
-            <Activity
-              size={48}
-              className="text-cyan-400"
-            />
-
-            <h3 className="text-2xl font-bold mt-6">
-
-              Monitoreo
-
-            </h3>
-
-            <p className="text-slate-400 mt-4 leading-7">
-
-              Visualiza información importante desde cualquier dispositivo
-              con una interfaz intuitiva.
-
-            </p>
-
-          </div>
-
-          <div className="rounded-3xl bg-slate-900 border border-slate-800 p-8 hover:border-cyan-400 transition hover:-translate-y-2 duration-300">
-
-            <BellRing
-              size={48}
-              className="text-cyan-400"
-            />
-
-            <h3 className="text-2xl font-bold mt-6">
-
-              Alertas
-
-            </h3>
-
-            <p className="text-slate-400 mt-4 leading-7">
-
-              Recibe notificaciones cuando el sistema detecte condiciones
-              fuera de los parámetros establecidos.
-
-            </p>
-
-          </div>
+          <div className="w-28 h-1 rounded-full bg-cyan-400 mx-auto mt-10"></div>
 
         </div>
 
-      </div>
+        <div className="grid md:grid-cols-3 gap-8 mt-20">
 
+          <Card>
+
+            <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6">
+              <ShieldCheck
+                size={34}
+                className="text-cyan-400"
+              />
+            </div>
+
+            <h3 className="text-2xl font-bold">
+              Seguridad
+            </h3>
+
+            <p className="text-slate-400 leading-7 mt-4">
+              Detecta comportamientos anómalos antes de que
+              se conviertan en una falla crítica.
+            </p>
+
+          </Card>
+
+          <Card>
+
+            <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6">
+              <Activity
+                size={34}
+                className="text-cyan-400"
+              />
+            </div>
+
+            <h3 className="text-2xl font-bold">
+              Monitoreo
+            </h3>
+
+            <p className="text-slate-400 leading-7 mt-4">
+              Supervisa toda la infraestructura eléctrica
+              desde cualquier dispositivo y en tiempo real.
+            </p>
+
+          </Card>
+
+          <Card>
+
+            <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6">
+              <BellRing
+                size={34}
+                className="text-cyan-400"
+              />
+            </div>
+
+            <h3 className="text-2xl font-bold">
+              Alertas
+            </h3>
+
+            <p className="text-slate-400 leading-7 mt-4">
+              Recibe notificaciones automáticas cuando
+              el sistema detecte condiciones fuera de lo normal.
+            </p>
+
+          </Card>
+
+        </div>
+
+      </Container>
     </section>
   );
 }
