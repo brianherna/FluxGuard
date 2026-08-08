@@ -1,82 +1,170 @@
-import Container from "../ui/Container";
-import Card from "../ui/Card";
+import { motion } from "framer-motion";
 import {
-  Cpu,
   RadioTower,
-  MonitorSmartphone,
+  Network,
+  Cloud,
+  Activity,
+  ArrowRight,
 } from "lucide-react";
+
+const steps = [
+  {
+    number: "01",
+    title: "Sensores",
+    description:
+      "Los dispositivos recopilan la información necesaria del sistema.",
+    icon: RadioTower,
+  },
+  {
+    number: "02",
+    title: "Conexión",
+    description:
+      "La información es transmitida mediante la infraestructura de comunicación.",
+    icon: Network,
+  },
+  {
+    number: "03",
+    title: "Nube",
+    description:
+      "Los datos son centralizados para facilitar su almacenamiento y consulta.",
+    icon: Cloud,
+  },
+  {
+    number: "04",
+    title: "FluxGuard",
+    description:
+      "La plataforma organiza y analiza la información para facilitar su interpretación.",
+    icon: Activity,
+  },
+];
 
 export default function HowItWorks() {
   return (
-    <section
-      id="como-funciona"
-      className="py-28 bg-slate-950"
-    >
-      <Container>
+    <section className="how-section">
+      <div className="how-container">
+        {/* ENCABEZADO */}
+        <motion.div
+          className="how-heading"
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7 }}
+        >
+          <span className="section-eyebrow">
+            <span />
+            ¿CÓMO FUNCIONA?
+          </span>
 
-        <h2 className="text-5xl font-bold text-center">
-          ¿Cómo funciona?
-        </h2>
+          <h2>
+            De los datos
+            <span> a la información.</span>
+          </h2>
 
-        <p className="text-slate-400 text-center max-w-3xl mx-auto mt-6 text-lg">
-          FluxGuard utiliza sensores inteligentes para recopilar datos
-          eléctricos y enviarlos de forma inalámbrica hacia la plataforma,
-          donde son procesados y mostrados al usuario.
-        </p>
+          <p>
+            FluxGuard conecta cada etapa del proceso para convertir la
+            información recopilada en una experiencia clara y organizada.
+          </p>
+        </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 mt-20">
+        {/* FLUJO */}
+        <div className="how-flow">
+          {/* LÍNEA DE FONDO */}
+          <div className="flow-line" />
 
-          <Card>
-            <Cpu
-              className="text-cyan-400"
-              size={50}
-            />
+          {/* LÍNEA ANIMADA */}
+          <motion.div
+            className="flow-line-active"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{
+              duration: 1.8,
+              ease: "easeInOut",
+            }}
+          />
 
-            <h3 className="text-2xl font-bold mt-6">
-              Captura
-            </h3>
+          {steps.map((step, index) => {
+            const Icon = step.icon;
 
-            <p className="text-slate-400 mt-4 leading-7">
-              Sensores IoT instalados en la red eléctrica recopilan
-              información como voltaje, corriente y temperatura.
-            </p>
-          </Card>
+            return (
+              <motion.div
+                className="flow-step"
+                key={step.number}
+                initial={{
+                  opacity: 0,
+                  y: 25,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.3,
+                }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.25 + index * 0.18,
+                }}
+              >
+                {/* NODO */}
+                <div className="flow-node-wrapper">
+                  <motion.div
+                    className="flow-node"
+                    animate={{
+                      boxShadow: [
+                        "0 0 0 rgba(34,211,238,0)",
+                        "0 0 25px rgba(34,211,238,.25)",
+                        "0 0 0 rgba(34,211,238,0)",
+                      ],
+                    }}
+                    transition={{
+                      duration: 2.8,
+                      repeat: Infinity,
+                      delay: index * 0.5,
+                    }}
+                  >
+                    <Icon size={21} />
+                  </motion.div>
 
-          <Card>
-            <RadioTower
-              className="text-cyan-400"
-              size={50}
-            />
+                  <span className="flow-number">
+                    {step.number}
+                  </span>
+                </div>
 
-            <h3 className="text-2xl font-bold mt-6">
-              Comunicación
-            </h3>
+                {/* TEXTO */}
+                <div className="flow-content">
+                  <h3>{step.title}</h3>
 
-            <p className="text-slate-400 mt-4 leading-7">
-              Los dispositivos envían la información mediante LoRa y ESP32
-              hacia un servidor seguro.
-            </p>
-          </Card>
+                  <p>{step.description}</p>
+                </div>
 
-          <Card>
-            <MonitorSmartphone
-              className="text-cyan-400"
-              size={50}
-            />
-
-            <h3 className="text-2xl font-bold mt-6">
-              Visualización
-            </h3>
-
-            <p className="text-slate-400 mt-4 leading-7">
-              El usuario consulta los datos desde cualquier dispositivo
-              mediante una plataforma moderna e intuitiva.
-            </p>
-          </Card>
-
+                {/* FLECHA */}
+                {index < steps.length - 1 && (
+                  <div className="flow-arrow">
+                    <ArrowRight size={15} />
+                  </div>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
 
-      </Container>
+        {/* FRASE FINAL */}
+        <motion.div
+          className="how-bottom"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <span />
+          <p>
+            Una arquitectura conectada para una visualización más inteligente.
+          </p>
+          <span />
+        </motion.div>
+      </div>
     </section>
   );
 }
