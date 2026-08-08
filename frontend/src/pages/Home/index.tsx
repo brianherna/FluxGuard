@@ -6,6 +6,8 @@ import HowItWorks from "../../components/sections/HowItWorks";
 
 import Footer from "../../components/layout/Footer";
 
+import Technologies from "../../components/sections/Technologies";
+
 export default function Home() {
   return (
     <>
@@ -13,6 +15,7 @@ export default function Home() {
       <Hero />
       <About />
       <HowItWorks />
+      <Technologies />
       <Footer />
     </>
   );
