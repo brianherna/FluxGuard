@@ -1,4 +1,4 @@
-import { LogIn, Activity } from "lucide-react";
+import { Activity } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -13,7 +13,7 @@ export default function Navbar() {
       {/* LOGO */}
       <Link to="/" className="navbar-logo">
         <div className="navbar-logo-icon">
-          <Activity size={19} />
+          <Activity size={18} />
         </div>
 
         <span>
@@ -44,10 +44,9 @@ export default function Navbar() {
         </a>
       </nav>
 
-      {/* INICIAR SESIÓN */}
-      <Link to="/login" className="navbar-login">
-        <LogIn size={16} />
-        <span>Iniciar sesión</span>
+      {/* CONTACTO */}
+      <Link to="/register" className="navbar-login">
+        Solicitar información
       </Link>
     </motion.header>
   );

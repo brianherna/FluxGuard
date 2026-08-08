@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
+import { Link } from "react-router-dom";
 import AnimatedGraph from "./AnimatedGraph";
 
 export default function Hero() {
   return (
-    <section id="inicio" className="hero">
-      <div className="hero-grid" />
-
+    <section className="hero" id="inicio">
+      {/* FONDOS */}
       <div className="hero-orb hero-orb-one" />
       <div className="hero-orb hero-orb-two" />
 
+      {/* CONTENIDO */}
       <div className="hero-content">
         <motion.div
           className="hero-label"
@@ -46,24 +47,26 @@ export default function Hero() {
           mediante información obtenida en tiempo real.
         </motion.p>
 
+        {/* BOTONES */}
         <motion.div
           className="hero-buttons"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.7 }}
         >
-          <button className="hero-primary">
-            Explorar plataforma
+          <Link to="/register" className="hero-primary">
+            Solicitar información
             <ArrowRight size={17} />
-          </button>
+          </Link>
 
-          <button className="hero-secondary">
+          <a href="#proyecto" className="hero-secondary">
             <Play size={16} />
             Conocer el proyecto
-          </button>
+          </a>
         </motion.div>
       </div>
 
+      {/* GRÁFICA */}
       <motion.div
         className="hero-graph-container"
         initial={{ opacity: 0 }}
@@ -73,6 +76,7 @@ export default function Hero() {
         <AnimatedGraph />
       </motion.div>
 
+      {/* ESTADÍSTICAS */}
       <motion.div
         className="hero-stats"
         initial={{ opacity: 0, y: 10 }}
@@ -95,6 +99,7 @@ export default function Hero() {
         </div>
       </motion.div>
 
+      {/* SCROLL */}
       <motion.div
         className="hero-scroll"
         animate={{ y: [0, 7, 0] }}

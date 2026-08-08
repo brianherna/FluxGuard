@@ -4240,3 +4240,342 @@ a {
     height: 14px;
   }
 }
+/* =========================================================
+   FORMULARIO DE CONTACTO - FLUXGUARD
+   ========================================================= */
+
+/* SELECT */
+.login-input-wrapper select {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #e8edf7;
+  font-family: inherit;
+  font-size: 15px;
+  appearance: none;
+  cursor: pointer;
+  padding: 0 40px 0 0;
+}
+
+/* OPCIONES DEL SELECT */
+.login-input-wrapper select option {
+  background: #0d1220;
+  color: #e8edf7;
+}
+
+/* Cuando no se ha seleccionado nada */
+.login-input-wrapper select:invalid {
+  color: #647089;
+}
+
+/* TEXTAREA */
+.login-input-wrapper textarea {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #e8edf7;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+  padding: 0;
+}
+
+/* PLACEHOLDER DEL TEXTAREA */
+.login-input-wrapper textarea::placeholder {
+  color: #647089;
+}
+
+/* CONTENEDOR DEL TEXTAREA */
+.textarea-wrapper {
+  align-items: flex-start;
+  min-height: 130px;
+  padding-top: 15px;
+}
+
+/* ÍCONO DEL TEXTAREA */
+.textarea-wrapper svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* SECCIONES DEL FORMULARIO */
+.register-section-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-top: 28px;
+  margin-bottom: 16px;
+
+  color: #e8edf7;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.register-section-title svg {
+  color: #22d3ee;
+}
+
+/* ESPACIADO ENTRE CAMPOS */
+.register-card .login-field {
+  margin-bottom: 18px;
+}
+
+/* GRID NOMBRE / APELLIDO */
+.register-name-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* TÉRMINOS */
+.register-terms {
+  margin-top: 20px;
+  margin-bottom: 22px;
+  align-items: flex-start;
+}
+
+.register-terms span {
+  line-height: 1.5;
+}
+
+/* MENSAJE DE ÉXITO */
+.form-success {
+  text-align: center;
+  padding: 35px 10px;
+}
+
+.form-success .login-lock {
+  margin: 0 auto 20px;
+}
+
+.form-success h3 {
+  color: #f1f5f9;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.form-success p {
+  color: #7d8aa3;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+/* BOTÓN DE ÉXITO */
+.form-success .login-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  text-decoration: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .register-name-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .register-card {
+    width: 100%;
+  }
+}
+.login-input-wrapper:has(select) {
+  position: relative;
+}
+
+.login-input-wrapper:has(select)::after {
+  content: "⌄";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #647089;
+  pointer-events: none;
+  font-size: 18px;
+}
+/* =========================
+   SELECTS DEL FORMULARIO
+========================= */
+
+.login-input-wrapper:has(select) {
+  position: relative;
+}
+
+.login-input-wrapper select {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #e5e7eb;
+  font-family: inherit;
+  font-size: 15px;
+  appearance: none;
+  cursor: pointer;
+  padding-right: 40px;
+}
+
+.login-input-wrapper select option {
+  background: #0b0f1a;
+  color: #e5e7eb;
+}
+
+.login-input-wrapper:has(select)::after {
+  content: "⌄";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #647089;
+  pointer-events: none;
+  font-size: 18px;
+}
+/* SELECT DEL FORMULARIO */
+
+.select-wrapper {
+  position: relative;
+  padding: 0;
+}
+
+.select-wrapper select {
+  width: 100%;
+  height: 100%;
+  min-height: 60px;
+
+  padding: 0 45px 0 18px;
+
+  border: none;
+  outline: none;
+  background: transparent;
+
+  color: #f1f5f9;
+  font-family: inherit;
+  font-size: 15px;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  cursor: pointer;
+}
+
+.select-wrapper::after {
+  content: "⌄";
+
+  position: absolute;
+  right: 18px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #64748b;
+  font-size: 18px;
+
+  pointer-events: none;
+}
+
+.select-wrapper select option {
+  background: #0b101c;
+  color: #f1f5f9;
+}
+
+
+/* TEXTAREA */
+
+.textarea-wrapper {
+  align-items: flex-start;
+  padding-top: 16px;
+}
+
+.textarea-wrapper textarea {
+  width: 100%;
+
+  min-height: 110px;
+
+  resize: vertical;
+
+  border: none;
+  outline: none;
+  background: transparent;
+
+  color: #f1f5f9;
+  font-family: inherit;
+  font-size: 15px;
+
+  padding: 0 0 0 2px;
+}
+
+.textarea-wrapper textarea::placeholder {
+  color: #647089;
+}
+
+
+/* TÍTULOS DE SECCIÓN */
+
+.form-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 28px;
+  margin-bottom: 16px;
+
+  color: #22d3ee;
+}
+
+.form-section-title h3 {
+  margin: 0;
+
+  color: #e5e7eb;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+
+/* MENSAJE DE ÉXITO */
+
+.login-success {
+  margin-bottom: 20px;
+  padding: 12px 14px;
+
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  border-radius: 10px;
+
+  background: rgba(34, 211, 238, 0.08);
+
+  color: #67e8f9;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* FORMULARIO DE PROSPECTOS */
+
+.register-card {
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+
+/* Scroll discreto */
+
+.register-card::-webkit-scrollbar {
+  width: 5px;
+}
+
+.register-card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.register-card::-webkit-scrollbar-thumb {
+  background: rgba(100, 112, 137, 0.3);
+  border-radius: 10px;
+}

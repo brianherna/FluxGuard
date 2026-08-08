@@ -2,56 +2,115 @@ import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft,
-  Eye,
-  EyeOff,
-  LockKeyhole,
+  Building2,
+  BriefcaseBusiness,
   Mail,
+  MessageSquare,
+  Phone,
+  Send,
   ShieldCheck,
   User,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Register() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [correo, setCorreo] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [empresa, setEmpresa] = useState("");
+  const [cargo, setCargo] = useState("");
+  const [sector, setSector] = useState("");
+  const [interes, setInteres] = useState("");
+  const [mensaje, setMensaje] = useState("");
+  const [acepta, setAcepta] = useState(false);
 
-  const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [terms, setTerms] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert("Las contraseñas no coinciden.");
+    setError("");
+    setSuccess("");
+
+    if (!acepta) {
+      setError(
+        "Debes aceptar que FluxGuard utilice tus datos para ponerse en contacto contigo."
+      );
       return;
     }
 
-    if (!terms) {
-      alert("Debes aceptar los términos y condiciones.");
-      return;
-    }
+    setLoading(true);
 
-    // Por ahora solamente comprobamos los datos.
-    // Después conectaremos este formulario con el backend.
-    console.log({
-      name,
-      lastName,
-      email,
-      password,
-      confirmPassword,
-    });
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/prospectos",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nombre,
+            apellido,
+            correo,
+            telefono,
+            empresa,
+            cargo,
+            sector,
+            interes,
+            mensaje,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        setError(
+          data.message ||
+            "No se pudieron enviar tus datos."
+        );
+        return;
+      }
+
+      setSuccess(
+        "¡Gracias por tu interés! Hemos recibido tus datos y nos pondremos en contacto contigo."
+      );
+
+      // Limpiar formulario
+      setNombre("");
+      setApellido("");
+      setCorreo("");
+      setTelefono("");
+      setEmpresa("");
+      setCargo("");
+      setSector("");
+      setInteres("");
+      setMensaje("");
+      setAcepta(false);
+    } catch (error) {
+      console.error(
+        "Error al enviar prospecto:",
+        error
+      );
+
+      setError(
+        "No se pudo conectar con el servidor. Verifica que el backend esté ejecutándose."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <main className="login-page">
-      {/* FONDO */}
-      <div className="login-background">
-        <div className="login-grid" />
 
+      {/* FONDO */}
+
+      <div className="login-background">
         <motion.div
           className="login-glow login-glow-one"
           animate={{
@@ -80,18 +139,29 @@ export default function Register() {
       </div>
 
       {/* VOLVER */}
+
       <Link to="/" className="login-back">
         <ArrowLeft size={16} />
         Volver al inicio
       </Link>
 
       <div className="login-wrapper register-wrapper">
-        {/* PRESENTACIÓN */}
+
+        {/* LADO IZQUIERDO */}
+
         <motion.section
           className="login-intro"
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
+          initial={{
+            opacity: 0,
+            x: -30,
+          }}
+          animate={{
+            opacity: 1,
+            x: 0,
+          }}
+          transition={{
+            duration: 0.7,
+          }}
         >
           <div className="login-brand">
             <div className="login-brand-icon">
@@ -103,36 +173,49 @@ export default function Register() {
 
           <span className="section-eyebrow">
             <span />
-            NUEVA CUENTA
+            CONOCE FLUXGUARD
           </span>
 
           <h1>
-            Comienza a
+            Hablemos de
             <br />
-            <span>conocer FluxGuard.</span>
+            <span>tu proyecto.</span>
           </h1>
 
           <p>
-            Crea tu cuenta para acceder posteriormente a las
-            herramientas y funcionalidades de la plataforma.
+            Déjanos tus datos y cuéntanos qué
+            necesitas. Nuestro equipo podrá
+            ponerse en contacto contigo para
+            brindarte más información sobre
+            FluxGuard.
           </p>
 
           <div className="login-status">
             <span className="status-dot" />
-            Registro seguro
+            SOLICITUD DE INFORMACIÓN
           </div>
         </motion.section>
 
         {/* FORMULARIO */}
+
         <motion.section
           className="login-card register-card"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{
+            opacity: 0,
+            y: 30,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
           transition={{
             duration: 0.7,
             delay: 0.1,
           }}
         >
+
+          {/* ENCABEZADO */}
+
           <div className="login-card-header">
             <div className="login-lock">
               <User size={20} />
@@ -140,62 +223,119 @@ export default function Register() {
 
             <div>
               <span className="login-card-label">
-                REGISTRO
+                CONTACTO
               </span>
 
-              <h2>Crear cuenta</h2>
+              <h2>
+                Conoce FluxGuard
+              </h2>
             </div>
           </div>
 
           <p className="login-description">
-            Completa tus datos para crear tu cuenta en FluxGuard.
+            Completa el siguiente formulario y
+            nos pondremos en contacto contigo.
           </p>
 
+          {/* MENSAJE DE ERROR */}
+
+          {error && (
+            <motion.div
+              className="login-error"
+              initial={{
+                opacity: 0,
+                y: -8,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+            >
+              {error}
+            </motion.div>
+          )}
+
+          {/* MENSAJE DE ÉXITO */}
+
+          {success && (
+            <motion.div
+              className="login-success"
+              initial={{
+                opacity: 0,
+                y: -8,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+            >
+              {success}
+            </motion.div>
+          )}
+
           <form onSubmit={handleSubmit}>
-            {/* NOMBRE Y APELLIDO */}
+
+            {/* DATOS DE CONTACTO */}
+
+            <div className="form-section-title">
+              <User size={18} />
+              <h3>Datos de contacto</h3>
+            </div>
+
             <div className="register-name-grid">
+
+              {/* NOMBRE */}
+
               <div className="login-field">
-                <label htmlFor="name">Nombre</label>
+                <label htmlFor="nombre">
+                  Nombre
+                </label>
 
                 <div className="login-input-wrapper">
                   <User size={17} />
 
                   <input
-                    id="name"
+                    id="nombre"
                     type="text"
                     placeholder="Tu nombre"
-                    value={name}
+                    value={nombre}
                     onChange={(event) =>
-                      setName(event.target.value)
+                      setNombre(event.target.value)
                     }
                     required
                   />
                 </div>
               </div>
 
+              {/* APELLIDO */}
+
               <div className="login-field">
-                <label htmlFor="lastName">Apellido</label>
+                <label htmlFor="apellido">
+                  Apellido
+                </label>
 
                 <div className="login-input-wrapper">
                   <User size={17} />
 
                   <input
-                    id="lastName"
+                    id="apellido"
                     type="text"
                     placeholder="Tu apellido"
-                    value={lastName}
+                    value={apellido}
                     onChange={(event) =>
-                      setLastName(event.target.value)
+                      setApellido(event.target.value)
                     }
                     required
                   />
                 </div>
               </div>
+
             </div>
 
             {/* CORREO */}
+
             <div className="login-field">
-              <label htmlFor="register-email">
+              <label htmlFor="correo">
                 Correo electrónico
               </label>
 
@@ -203,149 +343,270 @@ export default function Register() {
                 <Mail size={17} />
 
                 <input
-                  id="register-email"
+                  id="correo"
                   type="email"
-                  placeholder="correo@ejemplo.com"
-                  value={email}
+                  placeholder="correo@empresa.com"
+                  value={correo}
                   onChange={(event) =>
-                    setEmail(event.target.value)
+                    setCorreo(event.target.value)
                   }
                   required
                 />
               </div>
             </div>
 
-            {/* CONTRASEÑA */}
+            {/* TELÉFONO */}
+
             <div className="login-field">
-              <label htmlFor="register-password">
-                Contraseña
+              <label htmlFor="telefono">
+                Teléfono
               </label>
 
               <div className="login-input-wrapper">
-                <LockKeyhole size={17} />
+                <Phone size={17} />
 
                 <input
-                  id="register-password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
-                  value={password}
+                  id="telefono"
+                  type="tel"
+                  placeholder="55 1234 5678"
+                  value={telefono}
                   onChange={(event) =>
-                    setPassword(event.target.value)
+                    setTelefono(event.target.value)
                   }
-                  minLength={8}
                   required
                 />
-
-                <button
-                  type="button"
-                  className="password-toggle"
-                  onClick={() =>
-                    setShowPassword((value) => !value)
-                  }
-                >
-                  {showPassword ? (
-                    <EyeOff size={17} />
-                  ) : (
-                    <Eye size={17} />
-                  )}
-                </button>
               </div>
             </div>
 
-            {/* CONFIRMAR CONTRASEÑA */}
+            {/* DATOS EMPRESA */}
+
+            <div className="form-section-title">
+              <Building2 size={18} />
+              <h3>Datos de la empresa</h3>
+            </div>
+
+            {/* EMPRESA */}
+
             <div className="login-field">
-              <label htmlFor="confirm-password">
-                Confirmar contraseña
+              <label htmlFor="empresa">
+                Empresa / institución
               </label>
 
               <div className="login-input-wrapper">
-                <LockKeyhole size={17} />
+                <Building2 size={17} />
 
                 <input
-                  id="confirm-password"
-                  type={
-                    showConfirmPassword ? "text" : "password"
-                  }
-                  placeholder="••••••••"
-                  value={confirmPassword}
+                  id="empresa"
+                  type="text"
+                  placeholder="Nombre de la empresa o institución"
+                  value={empresa}
                   onChange={(event) =>
-                    setConfirmPassword(event.target.value)
+                    setEmpresa(event.target.value)
                   }
-                  minLength={8}
-                  required
                 />
-
-                <button
-                  type="button"
-                  className="password-toggle"
-                  onClick={() =>
-                    setShowConfirmPassword(
-                      (value) => !value
-                    )
-                  }
-                >
-                  {showConfirmPassword ? (
-                    <EyeOff size={17} />
-                  ) : (
-                    <Eye size={17} />
-                  )}
-                </button>
               </div>
             </div>
 
-            {/* TÉRMINOS */}
+            {/* CARGO */}
+
+            <div className="login-field">
+              <label htmlFor="cargo">
+                Cargo
+              </label>
+
+              <div className="login-input-wrapper">
+                <BriefcaseBusiness size={17} />
+
+                <input
+                  id="cargo"
+                  type="text"
+                  placeholder="Ej. Director, Ingeniero, Gerente..."
+                  value={cargo}
+                  onChange={(event) =>
+                    setCargo(event.target.value)
+                  }
+                />
+              </div>
+            </div>
+
+            {/* SECTOR */}
+
+            <div className="login-field">
+              <label htmlFor="sector">
+                Sector
+              </label>
+
+              <div className="login-input-wrapper select-wrapper">
+                <select
+                  id="sector"
+                  value={sector}
+                  onChange={(event) =>
+                    setSector(event.target.value)
+                  }
+                >
+                  <option value="">
+                    Selecciona un sector
+                  </option>
+
+                  <option value="Energia">
+                    Energía
+                  </option>
+
+                  <option value="Industria">
+                    Industria
+                  </option>
+
+                  <option value="Tecnologia">
+                    Tecnología
+                  </option>
+
+                  <option value="Gobierno">
+                    Gobierno
+                  </option>
+
+                  <option value="Educacion">
+                    Educación
+                  </option>
+
+                  <option value="Otro">
+                    Otro
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            {/* INTERÉS */}
+
+            <div className="form-section-title">
+              <MessageSquare size={18} />
+              <h3>Interés en FluxGuard</h3>
+            </div>
+
+            <div className="login-field">
+              <label htmlFor="interes">
+                ¿Qué te interesa de FluxGuard?
+              </label>
+
+              <div className="login-input-wrapper select-wrapper">
+                <select
+                  id="interes"
+                  value={interes}
+                  onChange={(event) =>
+                    setInteres(event.target.value)
+                  }
+                >
+                  <option value="">
+                    Selecciona una opción
+                  </option>
+
+                  <option value="Monitoreo">
+                    Monitoreo de redes eléctricas
+                  </option>
+
+                  <option value="Analisis">
+                    Análisis de datos
+                  </option>
+
+                  <option value="Alertas">
+                    Detección de anomalías
+                  </option>
+
+                  <option value="Plataforma">
+                    Conocer la plataforma
+                  </option>
+
+                  <option value="Implementacion">
+                    Implementación empresarial
+                  </option>
+
+                  <option value="Otro">
+                    Otro
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            {/* MENSAJE */}
+
+            <div className="login-field">
+              <label htmlFor="mensaje">
+                Mensaje
+              </label>
+
+              <div className="login-input-wrapper textarea-wrapper">
+                <MessageSquare size={17} />
+
+                <textarea
+                  id="mensaje"
+                  placeholder="Cuéntanos brevemente qué necesitas..."
+                  value={mensaje}
+                  onChange={(event) =>
+                    setMensaje(event.target.value)
+                  }
+                  rows={4}
+                />
+              </div>
+            </div>
+
+            {/* CONSENTIMIENTO */}
+
             <label className="remember-me register-terms">
               <input
                 type="checkbox"
-                checked={terms}
+                checked={acepta}
                 onChange={(event) =>
-                  setTerms(event.target.checked)
+                  setAcepta(event.target.checked)
                 }
               />
 
               <span>
-                Acepto los términos y condiciones de FluxGuard.
+                Acepto que FluxGuard utilice mis
+                datos para ponerse en contacto
+                conmigo.
               </span>
             </label>
 
-            {/* CREAR CUENTA */}
+            {/* BOTÓN */}
+
             <motion.button
               type="submit"
               className="login-submit"
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.98 }}
+              disabled={loading}
+              whileHover={
+                !loading
+                  ? { y: -2 }
+                  : {}
+              }
+              whileTap={
+                !loading
+                  ? { scale: 0.98 }
+                  : {}
+              }
             >
-              <span>Crear cuenta</span>
+              <span>
+                {loading
+                  ? "Enviando..."
+                  : "Quiero conocer FluxGuard"}
+              </span>
 
-              <ArrowLeft
-                size={17}
-                className="login-submit-arrow"
-              />
+              {!loading && (
+                <Send size={17} />
+              )}
             </motion.button>
+
           </form>
 
-          <div className="login-divider">
-            <span />
-            <p>o</p>
-            <span />
-          </div>
-
-          {/* LOGIN */}
-          <div className="login-register">
-            <span>¿Ya tienes una cuenta?</span>
-
-            <Link to="/login">
-              Iniciar sesión
-            </Link>
-          </div>
+          {/* SEGURIDAD */}
 
           <div className="login-security">
             <ShieldCheck size={14} />
 
             <span>
-              Tus datos estarán protegidos.
+              Tus datos serán utilizados únicamente
+              para ponernos en contacto contigo.
             </span>
           </div>
+
         </motion.section>
       </div>
     </main>
