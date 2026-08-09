@@ -4,21 +4,54 @@ import About from "../../components/sections/About";
 import PlatformCarousel from "../../components/sections/PlatformCarousel";
 import Features from "../../components/sections/Features";
 import HowItWorks from "../../components/sections/HowItWorks";
+import Technologies from "../../components/sections/Technologies";
+import Footer from "../../components/layout/Footer";
+import BackToTop from "../../components/ui/BackToTop";
 
-export default function Home() {
+const Home = () => {
   return (
-    <main className="fluxguard">
+    <main id="inicio">
+
+      {/* NAVBAR */}
       <Navbar />
 
-      <Hero />
+      {/* HERO */}
+      <section id="hero">
+        <Hero />
+      </section>
 
-      <About />
+      {/* PROYECTO */}
+      <section id="proyecto">
+        <About />
+      </section>
 
-      <PlatformCarousel />
+      {/* CÓMO FUNCIONA */}
+      <section id="como-funciona">
+        <HowItWorks />
+      </section>
 
-      <Features />
+      {/* CARACTERÍSTICAS */}
+      <section id="monitoreo">
+        <Features />
+      </section>
 
-      <HowItWorks />
+      {/* TECNOLOGÍA */}
+      <section id="tecnologia">
+        <Technologies />
+      </section>
+
+      {/* RECURSOS / PLATAFORMA */}
+      <section id="recursos">
+        <PlatformCarousel />
+      </section>
+
+      {/* CONTACTO */}
+      <Footer />
+
+      <BackToTop />
+
     </main>
   );
-}
+};
+
+export default Home;

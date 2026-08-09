@@ -101,7 +101,13 @@ app.use(
 // SERVIDOR
 // ==============================
 
+console.log("🔥 ESTOY EJECUTANDO ESTE SERVER.TS");
+
 app.listen(PORT, () => {
+    console.log("🔥 SERVER REAL CARGADO");
+console.log("🔥 prospectRoutes:", prospectRoutes);
+console.log("🔥 RUTA /api/prospectos REGISTRADA");
+  console.log("🔥 LISTEN EJECUTADO");
   console.log(
     `FluxGuard API ejecutándose en http://localhost:${PORT}`
   );

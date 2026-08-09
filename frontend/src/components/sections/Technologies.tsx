@@ -50,13 +50,12 @@ const technologies = [
 
 export default function Technologies() {
   return (
-    <section className="py-28 bg-slate-900">
+  <section id="tecno" className="py-28 bg-slate-900">
+    <Container>
 
-      <Container>
-
-        <h2 className="text-5xl font-bold text-center">
-          Tecnologías
-        </h2>
+      <h2 className="text-5xl font-bold text-center">
+        Tecnologías
+      </h2>
 
         <p className="text-center text-slate-400 mt-6 max-w-3xl mx-auto">
           FluxGuard integra tecnologías modernas para ofrecer una solución

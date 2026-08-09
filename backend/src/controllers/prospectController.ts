@@ -255,12 +255,6 @@ export const crearProspecto = async (
       );
 
     } catch (emailError: any) {
-
-      // ==========================================
-      // EL PROSPECTO YA SE GUARDÓ
-      // PERO EL CORREO FALLÓ
-      // ==========================================
-
       console.error(
         "===================================="
       );
@@ -350,6 +344,76 @@ export const crearProspecto = async (
       success: false,
       message:
         "Ocurrió un error al guardar tus datos.",
+    });
+  }
+};
+
+// ==========================================
+// OBTENER PROSPECTOS
+// ==========================================
+
+export const obtenerProspectos = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+
+    const resultado = await pool.query(`
+      SELECT
+        id,
+        nombre,
+        apellido,
+        correo,
+        telefono,
+        empresa,
+        cargo,
+        sector,
+        interes,
+        mensaje,
+        fecha_registro
+      FROM prospectos
+      ORDER BY fecha_registro DESC
+    `);
+
+    return res.status(200).json({
+      success: true,
+      prospectos: resultado.rows,
+    });
+
+  } catch (error: any) {
+
+    console.error(
+      "===================================="
+    );
+
+    console.error(
+      "❌ ERROR AL OBTENER PROSPECTOS"
+    );
+
+    console.error(
+      "===================================="
+    );
+
+    console.error(error);
+
+    console.error(
+      "Mensaje:",
+      error?.message
+    );
+
+    console.error(
+      "Código PostgreSQL:",
+      error?.code
+    );
+
+    console.error(
+      "===================================="
+    );
+
+    return res.status(500).json({
+      success: false,
+      message:
+        "No se pudieron obtener los prospectos.",
     });
   }
 };
