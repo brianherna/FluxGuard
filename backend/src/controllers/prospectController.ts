@@ -136,7 +136,8 @@ export const crearProspecto = async (
     if (empresaLimpia.length > 150) {
       return res.status(400).json({
         success: false,
-        message: "El nombre de la empresa es demasiado largo.",
+        message:
+          "El nombre de la empresa es demasiado largo.",
       });
     }
 
@@ -244,11 +245,23 @@ export const crearProspecto = async (
         "Tus datos fueron enviados correctamente. Nos pondremos en contacto contigo.",
       prospecto: resultado.rows[0],
     });
-  } catch (error) {
-    console.error(
-      "Error al crear prospecto:",
-      error
-    );
+
+  } catch (error: any) {
+
+    // ==========================================
+    // ERROR REAL PARA DEPURACIÓN
+    // ==========================================
+
+    console.error("====================================");
+    console.error("❌ ERROR AL GUARDAR PROSPECTO");
+    console.error("====================================");
+    console.error(error);
+    console.error("Mensaje:", error?.message);
+    console.error("Código PostgreSQL:", error?.code);
+    console.error("Detalle:", error?.detail);
+    console.error("Tabla:", error?.table);
+    console.error("Columna:", error?.column);
+    console.error("====================================");
 
     return res.status(500).json({
       success: false,

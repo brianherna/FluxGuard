@@ -11,4 +11,14 @@ const pool = new Pool({
   password: process.env.DB_PASSWORD,
 });
 
+pool
+  .query("SELECT NOW()")
+  .then(() => {
+    console.log("✅ PostgreSQL conectado");
+  })
+  .catch((err) => {
+    console.error("❌ Error conectando a PostgreSQL");
+    console.error(err);
+  });
+
 export default pool;
