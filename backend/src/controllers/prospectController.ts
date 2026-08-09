@@ -1,5 +1,22 @@
 import { Request, Response } from "express";
 import pool from "../db/database";
+import nodemailer from "nodemailer";
+
+// ==========================================
+// CONFIGURACIÓN DE CORREO
+// ==========================================
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
+
+// ==========================================
+// CREAR PROSPECTO
+// ==========================================
 
 export const crearProspecto = async (
   req: Request,
@@ -51,7 +68,7 @@ export const crearProspecto = async (
     }
 
     // ==========================================
-    // LIMPIAR ESPACIOS
+    // LIMPIAR DATOS
     // ==========================================
 
     const nombreLimpio = nombre.trim();
@@ -85,7 +102,7 @@ export const crearProspecto = async (
         : "";
 
     // ==========================================
-    // EVITAR CAMPOS OBLIGATORIOS VACÍOS
+    // CAMPOS OBLIGATORIOS VACÍOS
     // ==========================================
 
     if (
@@ -198,7 +215,7 @@ export const crearProspecto = async (
     }
 
     // ==========================================
-    // INSERTAR EN POSTGRESQL
+    // GUARDAR EN POSTGRESQL
     // ==========================================
 
     const resultado = await pool.query(
@@ -236,6 +253,92 @@ export const crearProspecto = async (
     );
 
     // ==========================================
+    // ENVIAR CORREO DE CONFIRMACIÓN
+    // ==========================================
+
+    try {
+      await transporter.sendMail({
+        from: `"FluxGuard" <${process.env.EMAIL_USER}>`,
+        to: correoLimpio,
+        subject: "Gracias por contactar a FluxGuard",
+        html: `
+          <div style="
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            padding: 30px;
+            color: #1f2937;
+          ">
+
+            <h2 style="color: #06b6d4;">
+              ¡Gracias por contactar a FluxGuard!
+            </h2>
+
+            <p>
+              Hola <strong>${nombreLimpio}</strong>,
+            </p>
+
+            <p>
+              Hemos recibido correctamente tus datos y
+              agradecemos tu interés en FluxGuard.
+            </p>
+
+            <p>
+              Nuestro equipo revisará tu solicitud y se
+              pondrá en contacto contigo dentro de poco.
+            </p>
+
+            <p>
+              Si proporcionaste información sobre una empresa
+              o proyecto, podremos utilizarla para comprender
+              mejor tus necesidades.
+            </p>
+
+            <br>
+
+            <p>
+              Saludos,<br>
+              <strong>Equipo FluxGuard</strong>
+            </p>
+
+            <hr style="
+              border: none;
+              border-top: 1px solid #e5e7eb;
+              margin-top: 30px;
+            ">
+
+            <p style="
+              font-size: 12px;
+              color: #6b7280;
+            ">
+              Este correo fue enviado automáticamente.
+              Por favor, no respondas directamente a este mensaje.
+            </p>
+
+          </div>
+        `,
+      });
+
+      console.log(
+        `📧 Correo de confirmación enviado a: ${correoLimpio}`
+      );
+
+    } catch (emailError: any) {
+
+      // ==========================================
+      // ERROR DE CORREO
+      // ==========================================
+
+      console.error("====================================");
+      console.error("⚠️ PROSPECTO GUARDADO, PERO EL CORREO FALLÓ");
+      console.error("====================================");
+      console.error(emailError);
+      console.error("Mensaje:", emailError?.message);
+      console.error("Código:", emailError?.code);
+      console.error("====================================");
+    }
+
+    // ==========================================
     // RESPUESTA EXITOSA
     // ==========================================
 
@@ -249,7 +352,7 @@ export const crearProspecto = async (
   } catch (error: any) {
 
     // ==========================================
-    // ERROR REAL PARA DEPURACIÓN
+    // ERROR REAL
     // ==========================================
 
     console.error("====================================");
