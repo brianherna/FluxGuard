@@ -2,6 +2,7 @@ export default function Footer() {
   return (
     <footer className="bg-slate-950 border-t border-slate-800 py-10">
       <div className="max-w-7xl mx-auto px-6 text-center">
+
         <h3 className="text-2xl font-bold text-cyan-400">
           FluxGuard
         </h3>
@@ -10,9 +11,19 @@ export default function Footer() {
           Plataforma de monitoreo inteligente para infraestructura eléctrica.
         </p>
 
+        <a
+          href="https://flux-panel.onrender.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-6 bg-cyan-500 hover:bg-cyan-400 transition px-6 py-3 rounded-lg font-semibold text-slate-950"
+        >
+          Acceder al panel
+        </a>
+
         <div className="mt-6 text-sm text-slate-500">
           © 2026 FluxGuard. Todos los derechos reservados.
         </div>
+
       </div>
     </footer>
   );

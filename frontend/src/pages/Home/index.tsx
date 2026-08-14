@@ -8,6 +8,8 @@ import Footer from "../../components/layout/Footer";
 
 import Technologies from "../../components/sections/Technologies";
 
+import Features from "../../components/sections/Features";
+
 export default function Home() {
   return (
     <>
@@ -16,6 +18,7 @@ export default function Home() {
       <About />
       <HowItWorks />
       <Technologies />
+      <Features />
       <Footer />
     </>
   );

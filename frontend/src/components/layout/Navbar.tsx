@@ -25,9 +25,14 @@ export default function Navbar() {
           </a>
         </nav>
 
-        <button className="bg-cyan-500 hover:bg-cyan-400 transition px-5 py-2 rounded-lg font-semibold">
+        <a
+          href="https://flux-panel.onrender.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-cyan-500 hover:bg-cyan-400 transition px-5 py-2 rounded-lg font-semibold text-slate-950"
+        >
           Iniciar sesión
-        </button>
+        </a>
 
       </div>
     </header>
