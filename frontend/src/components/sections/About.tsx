@@ -1,115 +1,199 @@
-import { ShieldCheck, Activity, BellRing } from "lucide-react";
-import Container from "../ui/Container";
-import Card from "../ui/Card";
+import { motion } from "framer-motion";
+import {
+  Activity,
+  BellRing,
+  BrainCircuit,
+  ArrowUpRight,
+} from "lucide-react";
+
+const points = [
+  {
+    number: "01",
+    icon: Activity,
+    title: "Monitoreo continuo",
+    description:
+      "Obtén información en tiempo real sobre el comportamiento de tus sistemas.",
+  },
+  {
+    number: "02",
+    icon: BrainCircuit,
+    title: "Análisis inteligente",
+    description:
+      "Identifica patrones, cambios y comportamientos que requieren atención.",
+  },
+  {
+    number: "03",
+    icon: BellRing,
+    title: "Alertas inmediatas",
+    description:
+      "Recibe información cuando ocurre un evento que necesita ser revisado.",
+  },
+];
 
 export default function About() {
   return (
-    <section
-      id="proyecto"
-      className="py-32 bg-slate-950 text-white"
-    >
-      <Container>
-        <div className="max-w-3xl mx-auto text-center">
-
-          <span
-            className="
-            inline-block
-            px-5
-            py-2
-            rounded-full
-            border
-            border-cyan-400/30
-            bg-cyan-500/10
-            text-cyan-300
-            uppercase
-            tracking-[4px]
-            text-sm
-            "
-          >
-            Sobre FluxGuard
+    <section id="proyecto" className="about-section">
+      <div className="about-container">
+        {/* ENCABEZADO */}
+        <motion.div
+          className="about-heading"
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7 }}
+        >
+          <span className="section-eyebrow">
+            <span />
+            EL PROYECTO
           </span>
 
-          <h2 className="text-5xl font-bold mt-8">
-            ¿Qué es <span className="text-cyan-400">FluxGuard</span>?
+          <h2>
+            Datos que se convierten
+            <span> en decisiones.</span>
           </h2>
+        </motion.div>
 
-          <p className="text-slate-400 text-lg leading-8 mt-8">
-            FluxGuard es una plataforma desarrollada para supervisar
-            sistemas eléctricos mediante tecnologías IoT. Nuestro objetivo
-            es detectar anomalías, prevenir fallas y facilitar el monitoreo
-            remoto en tiempo real mediante una interfaz moderna, intuitiva
-            y accesible.
-          </p>
+        {/* CONTENIDO */}
+        <div className="about-layout">
+          {/* VISUAL */}
+          <motion.div
+            className="about-visual"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.8 }}
+            whileHover={{
+              scale: 1.015,
+            }}
+          >
+            <div className="about-visual-grid" />
 
-          <div className="w-28 h-1 rounded-full bg-cyan-400 mx-auto mt-10"></div>
+            <div className="about-glow" />
 
+            {/* Líneas de datos */}
+            <div className="data-line line-a" />
+            <div className="data-line line-b" />
+            <div className="data-line line-c" />
+
+            {/* Centro */}
+            <motion.div
+              className="system-core"
+              animate={{
+                boxShadow: [
+                  "0 0 20px rgba(34,211,238,.12)",
+                  "0 0 45px rgba(34,211,238,.3)",
+                  "0 0 20px rgba(34,211,238,.12)",
+                ],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+              }}
+            >
+              <Activity size={30} />
+            </motion.div>
+
+            {/* Nodos */}
+            <motion.div
+              className="about-node node-a"
+              animate={{ y: [-5, 5, -5] }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+              }}
+            >
+              <span />
+            </motion.div>
+
+            <motion.div
+              className="about-node node-b"
+              animate={{ y: [5, -5, 5] }}
+              transition={{
+                duration: 3.5,
+                repeat: Infinity,
+              }}
+            >
+              <span />
+            </motion.div>
+
+            <motion.div
+              className="about-node node-c"
+              animate={{ y: [-4, 6, -4] }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+              }}
+            >
+              <span />
+            </motion.div>
+
+            <div className="about-label">
+              <span>FLUXGUARD</span>
+              <strong>INTELLIGENT MONITORING</strong>
+            </div>
+
+            <div className="about-number">01</div>
+
+            <div className="about-corner">
+              <ArrowUpRight size={18} />
+            </div>
+          </motion.div>
+
+          {/* TEXTO */}
+          <motion.div
+            className="about-content"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
+          >
+            <p className="about-intro">
+              FluxGuard es una plataforma de monitoreo diseñada para
+              transformar información compleja en una experiencia clara,
+              visual e intuitiva.
+            </p>
+
+            <p className="about-description">
+              Centraliza la información obtenida de los sistemas y permite
+              visualizar su comportamiento, analizar cambios y detectar
+              situaciones que requieren atención.
+            </p>
+
+            <div className="about-points">
+              {points.map((point, index) => {
+                const Icon = point.icon;
+
+                return (
+                  <motion.div
+                    className="about-point"
+                    key={point.number}
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.3 + index * 0.12,
+                    }}
+                  >
+                    <div className="point-icon">
+                      <Icon size={18} />
+                    </div>
+
+                    <div className="point-text">
+                      <div className="point-title">
+                        <span>{point.number}</span>
+                        <h3>{point.title}</h3>
+                      </div>
+
+                      <p>{point.description}</p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
         </div>
-
-        <div className="grid md:grid-cols-3 gap-8 mt-20">
-
-          <Card>
-
-            <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6">
-              <ShieldCheck
-                size={34}
-                className="text-cyan-400"
-              />
-            </div>
-
-            <h3 className="text-2xl font-bold">
-              Seguridad
-            </h3>
-
-            <p className="text-slate-400 leading-7 mt-4">
-              Detecta comportamientos anómalos antes de que
-              se conviertan en una falla crítica.
-            </p>
-
-          </Card>
-
-          <Card>
-
-            <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6">
-              <Activity
-                size={34}
-                className="text-cyan-400"
-              />
-            </div>
-
-            <h3 className="text-2xl font-bold">
-              Monitoreo
-            </h3>
-
-            <p className="text-slate-400 leading-7 mt-4">
-              Supervisa toda la infraestructura eléctrica
-              desde cualquier dispositivo y en tiempo real.
-            </p>
-
-          </Card>
-
-          <Card>
-
-            <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6">
-              <BellRing
-                size={34}
-                className="text-cyan-400"
-              />
-            </div>
-
-            <h3 className="text-2xl font-bold">
-              Alertas
-            </h3>
-
-            <p className="text-slate-400 leading-7 mt-4">
-              Recibe notificaciones automáticas cuando
-              el sistema detecte condiciones fuera de lo normal.
-            </p>
-
-          </Card>
-
-        </div>
-
-      </Container>
+      </div>
     </section>
   );
 }

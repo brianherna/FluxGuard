@@ -1,40 +1,65 @@
+import { Activity } from "lucide-react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+
 export default function Navbar() {
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-8 py-4">
+    <motion.header
+      className="navbar fixed top-0 left-0 right-0 z-50"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      {/* LOGO */}
+      <a href="#inicio" className="navbar-logo">
+        <Activity size={24} />
 
-        <h1 className="text-2xl font-bold text-cyan-400">
-          FluxGuard
-        </h1>
+        <span>
+          Flux<span>Guard</span>
+        </span>
+      </a>
 
-        <nav className="hidden md:flex gap-8 text-slate-300">
-          <a href="#" className="hover:text-cyan-400 transition">
-            Inicio
-          </a>
+      {/* NAVEGACIÓN */}
+      <nav className="navbar-links">
 
-          <a href="#" className="hover:text-cyan-400 transition">
-            Proyecto
-          </a>
-
-          <a href="#" className="hover:text-cyan-400 transition">
-            Características
-          </a>
-
-          <a href="#" className="hover:text-cyan-400 transition">
-            Contacto
-          </a>
-        </nav>
-
-        <a
-          href="https://flux-panel.onrender.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-cyan-500 hover:bg-cyan-400 transition px-5 py-2 rounded-lg font-semibold text-slate-950"
-        >
-          Iniciar sesión
+        <a href="#inicio">
+          Inicio
         </a>
 
-      </div>
-    </header>
+        <a href="#proyecto">
+          Proyecto
+        </a>
+
+        <a href="#como-funciona">
+          Cómo funciona
+        </a>
+
+        <a href="#tecnologia">
+            Monoitoreo
+        </a>
+
+        <a href="#tecno">
+            Tecnologia
+        </a>
+
+        <a href="#recursos">
+          Recursos
+        </a>
+
+        <a href="#contacto">
+          Contacto
+        </a>
+
+      </nav>
+
+      {/* CONTACTO */}
+      <Link
+        to="/register"
+        className="navbar-login"
+      >
+        Solicitar información
+      </Link>
+
+    </motion.header>
   );
 }
