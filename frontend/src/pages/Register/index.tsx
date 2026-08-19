@@ -46,7 +46,7 @@ export default function Register() {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/prospectos",
+        "https://fluxguard.onrender.com/api/prospectos",
         {
           method: "POST",
           headers: {
