@@ -1,6 +1,5 @@
 import { Activity, ArrowUpRight, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const links = [
@@ -28,38 +27,61 @@ export default function Navbar() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <a href="#inicio" className="navbar-logo" onClick={() => setOpen(false)}>
+      {/* LOGO */}
+      <a
+        href="#inicio"
+        className="navbar-logo"
+        onClick={() => setOpen(false)}
+      >
         <span className="navbar-logo-icon">
           <Activity size={21} />
         </span>
+
         <span>
           Flux<span>Guard</span>
         </span>
       </a>
 
+      {/* LINKS */}
       <nav className={`navbar-links ${open ? "is-open" : ""}`}>
         {links.map(([label, href]) => (
-          <a key={href} href={href} onClick={() => goTo(href)}>
+          <a
+            key={href}
+            href={href}
+            onClick={() => goTo(href)}
+          >
             {label}
           </a>
         ))}
       </nav>
 
+      {/* ACTIONS */}
       <div className="navbar-actions">
-        <Link to="/login" className="navbar-login-secondary">
-          Iniciar sesión
-        </Link>
+
+        {/* CONTACTANOS */}
+        <a
+          href="/register"
+          className="navbar-contact"
+          onClick={() => setOpen(false)}
+        >
+          <span>Contáctanos</span>
+        </a>
+
+        {/* PANEL */}
         <a
           href="https://flux-panel.onrender.com"
           target="_blank"
           rel="noreferrer"
-          className="navbar-login"
+          className="navbar-panel"
+          onClick={() => setOpen(false)}
         >
-          Panel
+          <span>Panel</span>
           <ArrowUpRight size={16} />
         </a>
+
       </div>
 
+      {/* MOBILE */}
       <button
         type="button"
         className="navbar-mobile-toggle"
