@@ -44,7 +44,7 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="tecnologia" className="features-section">
+    <section id="caracteristicas" className="features-section">
       <div className="features-container">
         {/* HEADER */}
         <motion.div

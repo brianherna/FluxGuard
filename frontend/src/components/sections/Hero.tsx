@@ -1,16 +1,27 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
-import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  ChevronDown,
+  Cpu,
+  Gauge,
+  RadioTower,
+  ShieldCheck,
+} from "lucide-react";
 import AnimatedGraph from "./AnimatedGraph";
+
+const highlights = [
+  { icon: Cpu, label: "Adquisición", value: "ESP32" },
+  { icon: RadioTower, label: "Comunicación", value: "LoRa" },
+  { icon: Gauge, label: "Visualización", value: "Tiempo real" },
+];
 
 export default function Hero() {
   return (
     <section className="hero" id="inicio">
-      {/* FONDOS */}
+      <div className="hero-grid" />
       <div className="hero-orb hero-orb-one" />
       <div className="hero-orb hero-orb-two" />
 
-      {/* CONTENIDO */}
       <div className="hero-content">
         <motion.div
           className="hero-label"
@@ -19,7 +30,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <span className="status-dot" />
-          MONITOREO INTELIGENTE
+          PROTOTIPO IoT · FLUXGUARD
         </motion.div>
 
         <motion.h1
@@ -27,14 +38,11 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          Monitoreo
+          Convierte los datos
           <br />
-
-          <span>inteligente</span>
-
+          <span>en información</span>
           <br />
-
-          para redes eléctricas.
+          para tu infraestructura.
         </motion.h1>
 
         <motion.p
@@ -43,73 +51,85 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
         >
-          Visualiza, analiza y anticipa cualquier comportamiento anómalo
-          mediante información obtenida en tiempo real.
+          FluxGuard integra adquisición de datos, comunicación IoT y una
+          plataforma web para visualizar el comportamiento de una
+          infraestructura eléctrica de forma clara y oportuna.
         </motion.p>
 
-        {/* BOTONES */}
         <motion.div
           className="hero-buttons"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.7 }}
         >
-          <Link to="/register" className="hero-primary">
-            Solicitar información
-            <ArrowRight size={17} />
-          </Link>
-
-          <a href="#proyecto" className="hero-secondary">
-            <Play size={16} />
+          <a href="#proyecto" className="hero-primary">
             Conocer el proyecto
+            <ArrowRight size={17} />
           </a>
+
+          <a href="#como-funciona" className="hero-secondary">
+            Cómo funciona
+          </a>
+        </motion.div>
+
+        <motion.div
+          className="hero-highlights"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.9 }}
+        >
+          {highlights.map(({ icon: Icon, label, value }) => (
+            <div className="hero-highlight" key={label}>
+              <span className="hero-highlight-icon">
+                <Icon size={17} />
+              </span>
+              <span>
+                <small>{label}</small>
+                <strong>{value}</strong>
+              </span>
+            </div>
+          ))}
         </motion.div>
       </div>
 
-      {/* GRÁFICA */}
       <motion.div
         className="hero-graph-container"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.4, delay: 0.4 }}
+        initial={{ opacity: 0, x: 35 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1.1, delay: 0.35 }}
       >
-        <AnimatedGraph />
+        <div className="hero-dashboard-card">
+          <div className="hero-dashboard-top">
+            <div>
+              <span className="hero-dashboard-kicker">FLUXGUARD / MONITOR</span>
+              <strong>Comportamiento del sistema</strong>
+            </div>
+            <span className="hero-live-badge">
+              <span /> En línea
+            </span>
+          </div>
+
+          <div className="hero-dashboard-graph">
+            <AnimatedGraph />
+          </div>
+
+          <div className="hero-dashboard-footer">
+            <div>
+              <ShieldCheck size={15} />
+              <span>Datos centralizados</span>
+            </div>
+            <span>IoT · análisis · visualización</span>
+          </div>
+        </div>
       </motion.div>
 
-      {/* ESTADÍSTICAS */}
-      <motion.div
-        className="hero-stats"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.9 }}
-      >
-        <div>
-          <strong>98.4%</strong>
-          <span>Disponibilidad</span>
-        </div>
-
-        <div>
-          <strong>124K+</strong>
-          <span>Datos procesados</span>
-        </div>
-
-        <div>
-          <strong>24/7</strong>
-          <span>Monitoreo activo</span>
-        </div>
-      </motion.div>
-
-      {/* SCROLL */}
       <motion.div
         className="hero-scroll"
         animate={{ y: [0, 7, 0] }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-        }}
+        transition={{ duration: 2, repeat: Infinity }}
       >
-        ↓
-        <span>Desliza para descubrir</span>
+        <ChevronDown size={18} />
+        <span>Descubre FluxGuard</span>
       </motion.div>
     </section>
   );

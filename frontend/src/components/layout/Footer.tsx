@@ -1,5 +1,4 @@
 import {
-  GitBranch,
   Mail,
   Zap,
   ArrowUpRight,
@@ -9,8 +8,8 @@ import Container from "../ui/Container";
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-slate-800 bg-slate-950">
-        <footer id="contacto"></footer>
+    <footer id="contacto" className="relative overflow-hidden border-t border-slate-800 bg-slate-950">
+        
       {/* Glows decorativos */}
       <div className="pointer-events-none absolute -left-40 -top-40 h-96 w-96 rounded-full bg-cyan-500/10 blur-[120px]" />
 
@@ -134,18 +133,6 @@ export default function Footer() {
                       className="fill-current stroke-none"
                     />
                   </svg>
-                </a>
-
-                {/* GitHub */}
-                <a
-                  href="https://github.com/LizBernal/Reporte_Tecnico_FluxGuard/tree/main"
-                  aria-label="GitHub"
-                  className="group flex h-11 w-11 items-center justify-center rounded-xl border border-slate-800 bg-slate-900 text-slate-400 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-400"
-                >
-                  <GitBranch
-                    size={19}
-                    className="transition-transform duration-300 group-hover:scale-110"
-                  />
                 </a>
 
               </div>
