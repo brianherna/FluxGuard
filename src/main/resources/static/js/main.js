@@ -1,0 +1,1 @@
+// JavaScript base de FluxGuard
